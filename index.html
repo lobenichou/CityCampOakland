@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+  <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+  <script src="https://d3js.org/d3-array.v1.min.js"></script>
+  <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-format.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+  <script src="https://d3js.org/d3-scale.v2.min.js"></script>
+  <script src="https://d3js.org/d3-request.v1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+  <link href="https://api.mapbox.com/mapbox-assembly/v0.20.0/assembly.min.css" rel="stylesheet">
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <a class="shell-mb-logo-m" href="https://mapbox.com/" aria-label="Mapbox" ></a>
+    <h1>Oakland Police Stops Data (2015)</h1>
+  </div>
+  <h1>Mapbox Project</h1>
+  <div id="map" class="map-container">
+  </div>
+  <div class="map-container--options absolute <z2></z2> color-white">
+    <label class="radio-container mr6">
+      <input checked name="race" type="radio" value="all">
+      <div  class="radio mr6 radio--white"></div>
+        All
+    </label>
+    <label class="radio-container mr6">
+      <input name="race" type="radio" value="aa">
+      <div class="radio mr6 radio--white"></div>
+        African American
+    </label>
+    <label class="radio-container mr6">
+      <input name="race" type="radio" value="w">
+      <div class="radio mr6 radio--white"></div>
+        White
+    </label>
+    <label class="radio-container mr6">
+      <input name="race" type="radio" value="a">
+      <div class="radio mr6 radio--white"></div>
+        Asian
+    </label>
+    <label class="radio-container mr6">
+      <input name="race" type="radio" value="h">
+      <div class="radio mr6 radio--white"></div>
+        Hispanic
+    </label>
+    <label class="radio-container mr6">
+      <input name="race" type="radio" value="o">
+      <div class="radio mr6 radio--white"></div>
+        Other
+    </label>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

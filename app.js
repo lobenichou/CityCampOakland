@@ -1,4 +1,4 @@
-const {href} = window.location;
+// const {href} = window.location;
 const colorRange = ['#deebf7','#9ecae1','#3182bd'];
 
 // d3 for color range + density
@@ -72,56 +72,79 @@ map.on('load', () => {
     // we can also filter by race
     const getExtrusionHeightByRace = (race) => {
       const expression = ['match', ['get', 'Name']];
+
       for (const key in hashmap) {
         const newData = _.filter(hashmap[key], (o) => { return o.race === race; });
         expression.push(key, newData.length);
       }
+      // add value for no or null data
       expression.push(0);
-      console.log(expression)
+
       return expression;
     }
 
     const getExtrusionColorByRace = (race) => {
       const expression = ['match', ['get', 'Name']];
+
       for (const key in hashmap) {
         const newData = _.filter(hashmap[key], (o) => { return o.race === race; });
         expression.push(key, colorScale(newData.length));
       }
+      // add color for no or null data
       expression.push('rgb(196, 195, 195)');
       return expression;
     }
 
+    // map.addLayer({
+    //   "id": "stops-3d",
+    //   "type": "fill-extrusion",
+    //   "source": "beats",
+    //   "source-layer": "CommunityPoliceBeats2009",
+    //   "layout": {
+    //     "visibility": "visible"
+    //   },
+    //   "paint": {
+    //     "fill-extrusion-height": getExtrusionHeight(),
+    //     "fill-extrusion-opacity": .7,
+    //     "fill-extrusion-color": getExtrusionColor()
+    //   }
+    // }, "airport-label");
+
+
     map.addLayer({
-      "id": "stops-3d",
-      "type": "fill-extrusion",
+      "id": "stops-fill",
+      "type": "fill",
       "source": "beats",
       "source-layer": "CommunityPoliceBeats2009",
       "layout": {
         "visibility": "visible"
       },
       "paint": {
-        "fill-extrusion-height": getExtrusionHeight(),
-        "fill-extrusion-opacity": .7,
-        "fill-extrusion-color": getExtrusionColor()
+        // "fill-extrusion-height": getExtrusionHeight(),
+        // "fill-extrusion-opacity": .7,
+        "fill-color": getExtrusionColor(),
+        "fill-outline-color": 'black'
       }
     }, "airport-label");
 
     const toggleLayer = (race) => {
-      map.setPaintProperty('stops-3d', 'fill-extrusion-height', getExtrusionHeightByRace(race));
-      map.setPaintProperty('stops-3d', 'fill-extrusion-color', getExtrusionColorByRace(race));
+      // map.setPaintProperty('stops-3d', 'fill-extrusion-height', getExtrusionHeightByRace(race));
+      // map.setPaintProperty('stops-3d', 'fill-extrusion-color', getExtrusionColorByRace(race));
+      map.setPaintProperty('stops-fill', 'fill-color', getExtrusionColorByRace(race));
     }
 
     inputs.forEach((input) => {
       input.addEventListener('change', (e) => {
-        console.log(e.target.value)
         if (e.target.value !== 'all') {
           toggleLayer(labelObj[e.target.value]);
         } else {
-          map.setPaintProperty('stops-3d', 'fill-extrusion-height', getExtrusionHeight());
-          map.setPaintProperty('stops-3d', 'fill-extrusion-color', getExtrusionColor());
+          // map.setPaintProperty('stops-3d', 'fill-extrusion-height', getExtrusionHeight());
+          // map.setPaintProperty('stops-3d', 'fill-extrusion-color', getExtrusionColor());
+          map.setPaintProperty('stops-fill', 'fill-color', getExtrusionColor());
         }
       })
     });
+
     // let currentlyHoveredBeat = '';
     // const popup = new mapboxgl.Popup({
     //     closeButton: false,
